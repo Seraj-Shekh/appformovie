@@ -3,6 +3,7 @@ import './LoginSignup.css'
 import userIcon from "./assets/person.png";
 import emailIcon from "./assets/email.png";
 import passwordIcon from "./assets/password.png";
+import { useNavigate } from 'react-router-dom';
 
 const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:4000';
 
@@ -64,8 +65,19 @@ const LoginSignup = () => {
                 localStorage.setItem('user', JSON.stringify(data.user));
             }
 
-            setMessage(isSignup ? 'Account created. You are now logged in.' : 'Logged in successfully');
-            setError(null);
+                if (isSignup) {
+                    // After successful registration, switch to login mode and navigate to login page
+                    setIsSignup(false);
+                    setMessage('Successfully registered. Please log in.');
+                    setError(null);
+                    // ensure we're on the login route
+                    navigate('/');
+                } else {
+                    setMessage('Logged in successfully');
+                    setError(null);
+                    // go to home page
+                    navigate('/home');
+                }
         } catch (err) {
             console.error(err);
             setError('Network error');
@@ -74,7 +86,9 @@ const LoginSignup = () => {
         }
     }
 
-    return (
+        const navigate = useNavigate();
+
+        return (
         <div className='container'>
                 <div className='header'>
                         <div className='text'>{isSignup ? 'Sign Up' : 'Log In'}</div>
