@@ -89,13 +89,14 @@ const LoginSignup = () => {
         const navigate = useNavigate();
 
         return (
-        <div className='container'>
-                <div className='header'>
-                        <div className='text'>{isSignup ? 'Sign Up' : 'Log In'}</div>
-                        <div className='underline'></div>
-                </div>
+            <div className='container'>
+                <div className='card'>
+                    <div className='header'>
+                            <div className='text'>{isSignup ? 'Sign Up' : 'Log In'}</div>
+                            <div className='underline'></div>
+                    </div>
 
-                <form className='inputs' onSubmit={handleSubmit}>
+                    <form className='inputs' onSubmit={handleSubmit}>
                         {isSignup && (
                             <div className='input'>
                                 <img src={userIcon} alt="name" />
@@ -121,14 +122,15 @@ const LoginSignup = () => {
 
                         <div className="forget-password"> Lost Password? <span style={{cursor:'pointer'}}>Click Here</span></div>
 
-                        <div className="submit-container">
-                                <button className="submit" type="submit" disabled={loading}>{loading ? 'Please wait...' : (isSignup ? 'Sign Up' : 'Log In')}</button>
-                                <button type="button" className="submit" onClick={() => { setIsSignup(!isSignup); resetMessages(); }}>{isSignup ? 'Switch to Log In' : 'Switch to Sign Up'}</button>
-                        </div>
+            <div className="submit-container">
+                <button className="submit" type="submit" disabled={loading}>{loading ? 'Please wait...' : (isSignup ? 'Sign Up' : 'Log In')}</button>
+                <button type="button" className="submit secondary" onClick={() => { setIsSignup(!isSignup); resetMessages(); }}>{isSignup ? 'Switch to Log In' : 'Switch to Sign Up'}</button>
+            </div>
                 </form>
 
                 {message && <div className='message success'>{message}</div>}
                 {error && <div className='message error'>{error}</div>}
+            </div>
         </div>
     )
 }
